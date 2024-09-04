@@ -8,7 +8,7 @@ int main ()
     vector<int> v1 = {1,2,3,4,5}; //vector of integers.
 
     cout<<v1[1]<<endl;
-    v1.front(); //returns the first element of the vector.
+  //  v1.front(); //returns the first element of the vector.
     v1.back(); //returns the last element of the vector.
     v1.size(); //returns the size of the vector.
     v1.push_back(2); //pushes the element at the end of the vector.
