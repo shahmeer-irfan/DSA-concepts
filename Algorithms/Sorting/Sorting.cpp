@@ -1,7 +1,7 @@
-//23k-0832
 #include <iostream>
-
 using namespace std;
+
+/*this cpp file contains important sorting algorithms with explaination*/
 
 class Sorting
 {
@@ -31,7 +31,7 @@ public:
     {
         for (int i = 0; i < num; i++)
         {
-            bool flag = false;
+            bool flag = false;  //check for optimzation
             for (int j = 0; j < num - i - 1; j++)
             {
                 if (array[j] > array[j + 1])
@@ -40,13 +40,14 @@ public:
                     flag = true;
                 }
             }
-            if (!flag) //exiting if array is already sorted
+            if (!flag) //exiting if array is already sorted---best case scenerio time complexity = O(n);
             {
                 break;
             }
         }
     }
 
+/*Remember it as inserting card on top of each other in ascending order*/
     void insertionSort()
     {
         for (int i = 1; i < num; i++)  //starting from second element cuz array is already sorted
@@ -55,10 +56,10 @@ public:
             int key = array[i];  
             while (j >= 0 && array[j] > key)
             {
-                array[j + 1] = array[j]; //shifting element
+                array[j + 1] = array[j]; //shifting element one index forward
                 j--; //moving backward
             }
-            array[j + 1] = key;
+            array[j + 1] = key;  //inserting key in empty place.
         }
     }
 

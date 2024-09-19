@@ -1,7 +1,8 @@
-//23k-0832
 #include <iostream>
 
 using namespace std;
+/*This cpp file contains all the necessary functions that you can perform on Doubly Linked list with proper explaination*/
+
 
 class Node
 {
@@ -33,7 +34,7 @@ public:
         }
 
         newNode->next = head;
-        head->prev = newNode;
+        head->prev = newNode;  //it can also be written as newNode->next->prev = newNode;
         head = newNode;
     }
 
@@ -99,18 +100,18 @@ public:
             return;
         }
 
-        Node *temp = head;
-        head = head->next;
+        Node *temp = head;  //storing head in temp variable
+        head = head->next; //shifting head to second node
 
-        if (head != nullptr)
+        if (head != nullptr) //checking if second node exists
         {
-            head->prev = nullptr;
+            head->prev = nullptr;  //making prev pointer null
         }
         else
         {
-            tail = nullptr;
+            tail = nullptr; //if second node doesnt exist it means tail is also nullptr 
         }
-        delete temp;
+        delete temp;  //deleting head.
     }
 
     void deleteLastNode()
@@ -167,7 +168,7 @@ public:
             return;
         }
 
-        temp->prev->next = temp->next;
+        temp->prev->next = temp->next;  
         if (temp->next != nullptr)
         {
             temp->next->prev = temp->prev;
@@ -184,12 +185,12 @@ public:
             return;
         }
         cout << "Doubly Linked List: ";
-        while (temp != nullptr)
+        while (temp != nullptr)   //will iterate till last
         {
             cout << temp->data;
             if (temp->next != nullptr)
                 cout << " <-> ";
-            temp = temp->next;
+            temp = temp->next;   //traversing further
         }
         cout << endl;
     }

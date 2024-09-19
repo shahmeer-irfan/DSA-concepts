@@ -1,7 +1,8 @@
-//23k-0832
 #include <iostream>
 using namespace std;
-class Node
+
+/*This cpp file contains all the necessary functions that you can perform on Singly Linked list with proper explaination */
+    class Node
 {
     int data;
     Node *next;
@@ -57,7 +58,7 @@ public:
 
         Node *newNode = new Node(insertValue);
 
-        if (head->data == value)
+        if (head->data == value) //if value is at head
         {
             newNode->next = head;
             head = newNode;
@@ -70,7 +71,7 @@ public:
         while (temp != nullptr && temp->data != value)
         {
             previousPtr = temp;
-            temp = temp->next;
+            temp = temp->next; 
         }
 
         if (temp == nullptr)
