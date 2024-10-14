@@ -115,22 +115,22 @@ public:
         }
     }
 
-    void insertionSort()
-    {
-        Node *current = head; // index i
-            Node *prev = NULL;
+    // void insertionSort()
+    // {
+    //     Node *current = head; // index i
+    //         Node *prev = NULL;
 
-        while(current!=NULL)
-        {
-            int key = current->next->data;
-            prev = current;
+    //     while(current!=NULL)
+    //     {
+    //         int key = current->next->data;
+    //         prev = current;
 
-            while(prev!=NULL && prev->data > key)
-            {
-                prev
-            }
-        }
-    }
+    //         while(prev!=NULL && prev->data > key)
+    //         {
+    //             prev
+    //         }
+    //     }
+    // }
 };
 
 int main()

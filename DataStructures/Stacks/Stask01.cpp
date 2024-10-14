@@ -1,3 +1,4 @@
+//23k-0832
 #include <iostream>
 
 using namespace std;
@@ -6,6 +7,7 @@ class Stack
 {
     int top;
     int *array;
+    
     int cap;
 
 public:
