@@ -1,76 +1,58 @@
-// #include <iostream>
+#include <iostream>
 
-// using namespace std;
+using namespace std;
 
-// class Node
-// {
-//     int data;
-//     Node *next;
-//     friend class LinkedList;
+int partion(int arr[], int low, int high)
+{
+    int pivot = arr[low]; //first element as pivot
+    int i = low + 1;  //starting from second element
+    int j = high; //last element
 
-// public:
-//     Node(int data) : data(data), next(nullptr) {};
-//     Node() : data(0), next(nullptr) {};
-// };
+    while (i <= j) //loop until i and j cross each other
+    {
+        while (arr[i] <= pivot) //if element is less than pivot then move to next element
+        {
+            i++;
+        }
 
-// class LinkedList
-// {
-//     Node *head;
+        while (arr[j] > pivot) //if element is greater than pivot then move to previous element
+        {
+            j--;
+        }
 
-// public:
-//     LinkedList() : head(nullptr) {};
-//     LinkedList(Node *n) : head(n) {};
+        if (i < j) //if i and j have not crossed each other then swap the elements
+        {
+            swap(arr[i], arr[j]);
+        }
+    }
+    swap(arr[low], arr[j]); //swap pivot element with element at j to make pivot at right positioon
+    return j; //return pivot position
+}
 
-//     // Insert at the front
-//     void insertAtFront(int data)
-//     {
-//         Node *newNode = new Node(data);
-//         newNode->next = head;
-//         head = newNode;
-//     }
+void quickSort(int arr[], int low, int high)
+{
+    if (low >= high)
+    {
+        return;
+    }
 
-//     // Insert at the end
-//     void insertAtEnd(int data)
-//     {
-//         Node *newNode = new Node(data);
-//         if (head == nullptr)
-//         {
-//             head = newNode;
-//             return;
-//         }
+    int pivot = partion(arr, low, high); 
+    quickSort(arr, low, pivot - 1);  // sorting left part before pivot element
+    quickSort(arr, pivot + 1, high); // sorting right part after pivot+1
+}
 
-//         Node *temp = head;
-//         while (temp->next != nullptr)
-//         {
-//             temp = temp->next;
-//         }
-//         temp->next = newNode;
-//     }
+int main()
+{
+    int arr[] = {5, 2, 3, 6, 1};
+    int n = sizeof(arr) / sizeof(arr[0]);
 
-//     void swapData(Node *a, Node *b)
-//     {
-//         int temp = a->data;
-//         a->data = b->data;
-//         b->data = temp;
-//     }
+    quickSort(arr, 0, n - 1);
+    
+    for(int i=0; i<n; i++)
+    {
+        cout << arr[i] << " ";
+    }
 
 
-//     Node Partition(Node *pivot, Node *lb, Node *ub)
-//     {
-//         pivot = head;
-//         Node *start = lb;
-//         Node *end = ub;
-
-//        Node *temp = head;
-//        int count = 0;
-//        while(temp->next!=nullptr)
-//        {
-//         if(temp->data)
-//        }
-
-//     }
-// };
-//     int main()
-//     {
-//         return 0;
-//     }
+    return 0;
+}

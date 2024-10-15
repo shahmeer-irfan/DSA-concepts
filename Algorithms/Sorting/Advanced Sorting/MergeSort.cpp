@@ -79,7 +79,7 @@ public:
         }
 
         int mid = start + (end - start) / 2;
-        mergeSort(runners, start, mid);
+        mergeSort(runners, start, mid); //mid included (different from quicksort)
         mergeSort(runners, mid + 1, end);
         merge(runners, start, mid, end);
     }
