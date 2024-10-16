@@ -71,27 +71,27 @@ public:
         Node *current = head;
         while(current != NULL)
         {
-            Node *minPtr = current;
-            Node *temp  = current->next;
+            Node *minPtr = current; //minIndex = i;
+            Node *temp  = current->next; //j = i+1
 
-            while(temp != NULL)
+            while(temp != NULL)   //j!=null
             {
                 if(minPtr->data > temp->data)
                 {
                     minPtr = temp;
                 }
 
-                temp = temp->next;
+                temp = temp->next; //j++
             }
 
-            if(minPtr!=current)
+            if(minPtr!=current) //minptr !=i
             {
                 int swap = current->data;
                 current->data = minPtr->data;
                 minPtr->data = swap;
             }
 
-            current = current->next;
+            current = current->next; //i++
         }
     }
 
