@@ -1,7 +1,5 @@
 #include <iostream>
-#include <string>
 using namespace std;
-
 class Runners
 {
     string name;
@@ -79,7 +77,7 @@ public:
         }
 
         int mid = start + (end - start) / 2;
-        mergeSort(runners, start, mid); //mid included (different from quicksort)
+        mergeSort(runners, start, mid); // mid included (different from quicksort)
         mergeSort(runners, mid + 1, end);
         merge(runners, start, mid, end);
     }

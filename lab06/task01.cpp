@@ -1,4 +1,5 @@
-#include <iostream
+//23k-0832
+#include <iostream>
 using namespace std;
 
 class Stack
@@ -96,9 +97,13 @@ public:
     }
 
     int getSize()
-
     {
         return size;
+    }
+
+    int getTop()
+    {
+        return top;
     }
 };
 
@@ -119,7 +124,8 @@ int main()
     stack.push(9);
     stack.push(10);
 
-    for (int i = 0; i < stack.getSize(); i++)
+    // Use the number of elements in the stack (top+1), not the total size
+    while (!stack.isEmpty())
     {
         int popValue = stack.pop();
 
@@ -138,5 +144,6 @@ int main()
 
     cout << "Odd numbers in the stack:" << endl;
     stackOdd.display();
+
     return 0;
 }

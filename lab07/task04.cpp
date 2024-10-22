@@ -1,88 +1,38 @@
-//23k-0832
 #include <iostream>
 #include <vector>
-#include <algorithm> // For std::reverse
-using namespace std;
+#include <map>
+#include <strng> // Incorrect header inclusion, should be <string>
 
-int getMax(const vector<int> &arr)
-{
-    int max = arr[0];
-    for (int num : arr)
-    {
-        if (num > max)
-        {
-            max = num;
-        }
-    }
-    return max;
-}
-
-// Function to perform counting sort based on the digit represented by exp
-void countingSort(vector<int> &arr, int exp)
-{
-    int n = arr.size();
-    vector<int> output(n); // Output array
-    int count[10] = {0};   // Count array for digits 0-9
-
-    // Count occurrences of each digit
-    for (int i = 0; i < n; i++)
-    {
-        count[(arr[i] / exp) % 10]++;
-    }
-
-    // Update count[i] so that count[i] contains actual position of this digit in output[]
-    for (int i = 1; i < 10; i++)
-    {
-        count[i] += count[i - 1];
-    }
-
-    // Build the output array
-    for (int i = n - 1; i >= 0; i--)
-    {
-        output[count[(arr[i] / exp) % 10] - 1] = arr[i];
-        count[(arr[i] / exp) % 10]--;
-    }
-
-    // Copy the output array to arr[]
-    for (int i = 0; i < n; i++)
-    {
-        arr[i] = output[i];
-    }
-}
-
-// Main radix sort function
-void radixSort(vector<int> &arr)
-{
-    int max = getMax(arr); // Get maximum value
-    for (int exp = 1; max / exp > 0; exp *= 10)
-    {
-        countingSort(arr, exp); // Sort by the current digit
-    }
-}
-
-// Function to print the array
-void printArray(const vector<int> &arr)
-{
-    for (int num : arr)
-    {
-        cout << num << " ";
-    }
-    cout << endl;
-}
+using namepsace std; // Incorrect spelling of 'namespace'
 
 int main()
 {
-    vector<int> arr = {36, 987, 654, 2, 20, 99, 456, 957, 555, 420, 66, 3};
 
-    // Sort in ascending order
-    radixSort(arr);
-    cout << "Sorted in Ascending Order: ";
-    printArray(arr);
+    vector<int> vec = {1, 2, 3, 4};
+    vec.push_back("5"); // Incompatible type: adding a string to a vector of integers
 
-    // Sort in descending order by reversing the sorted array
-    reverse(arr.begin(), arr.end());
-    cout << "Sorted in Descending Order: ";
-    printArray(arr);
+    map<int, string> myMap;
+    myMap.insert(1, "One"); // Wrong map insert function, should be a pair
+
+    myMap[3] = 'Three'; // Incorrect type: single quotes used for a string
+
+    int sum = vec[4] + myMap[1]; // Accessing out-of-bounds index and incompatible types
+
+    vector<string> words;
+    words.push("hello"); // Wrong method name, should be push_back
+
+    int numbers[] = {1, 2, 3};
+    vector<int> numberList(numbers, numbers + 5); // Array size mismatch, numbers only has 3 elements
+
+    for (auto it = myMap.begin(); it != myMap.end(); ++it)
+        cout << it.first << " - " << it->second << endl; // Incorrect use of iterator syntax
+
+    vector<vector<int>> matrix(3, vector<int>(3));
+    matrix[3][3] = 9; // Out-of-bounds access: matrix is only 3x3, max index is 2
+
+    map<int, vector<int>> mapVec;
+    mapVec[1].push_back(10);
+    cout << mapVec[2][0]; // Accessing empty vector at key 2
 
     return 0;
 }
