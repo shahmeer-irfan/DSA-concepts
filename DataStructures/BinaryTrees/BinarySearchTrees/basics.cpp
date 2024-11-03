@@ -105,6 +105,31 @@ public:
         return nullptr;
     }
 
+    int height(Node *root)
+    {
+        if(root==NULL)
+        {
+            return -1;
+        }
+
+        else{
+            int hLeft = height(root->left);   // Recursively find the height of the left subtree
+            int hRight = height(root->right); // Recursively find the height of the right subtree
+
+            if (hLeft > hRight)
+            {
+                return (hLeft + 1); // Add 1 for the current node
+            }
+            else
+            {
+                return (hRight + 1); // Add 1 for the current node
+            }
+
+                //OR
+              //  return 1+ std::max(hLeft, hRight);
+        }
+    }
+
     Node *delNode(Node *root, int data)
     {
         if (root == nullptr)
