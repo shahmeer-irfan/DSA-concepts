@@ -24,12 +24,12 @@ class Node
 
 Node *buildTree(Node *root)
 {
-    cout<<"Enter value of root node: "<<endl;
+    cout<<"Enter data to be inserted or type 1 for no insertion: "<<endl;
 
     int data;
     cin>>data;
     root = new Node(data);
-
+    
     if(data==-1)
     {
         return NULL;
@@ -52,7 +52,7 @@ void levelOrderTraversel(Node *root)
     }
     queue<Node *> q;  //queue of Node pointers
     q.push(root);
-    //q.push(NULL);
+    // q.push(NULL);
 
         while(!q.empty())
         {
@@ -60,7 +60,7 @@ void levelOrderTraversel(Node *root)
             cout<<temp->data<<endl;
             q.pop();
 
-            // separator logic to print in tree format
+           // separator logic to print in tree format
             // if(temp==NULL)
             // {
             //     cout<<endl;
@@ -79,7 +79,6 @@ void levelOrderTraversel(Node *root)
             {
                 q.push(temp->right);
             }
-
         }
 }
 
