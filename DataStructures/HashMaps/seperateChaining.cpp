@@ -1,106 +1,80 @@
 #include <iostream>
+#include <vector>
 using namespace std;
 
-class HashTableChaining {
+class HashTableChaining
+{
 private:
-    struct Node {
+    struct Node
+    {
         int key;
-        Node* next;
+        Node *next;
         Node(int k) : key(k), next(nullptr) {}
     };
 
     int size;
-    Node** keys;
+    vector<vector<int>> keys; // Vector of vectors to represent chains
 
-    int hashFunction(int key) {
+    int hashFunction(int key)
+    {
         return key % size;
     }
 
 public:
-    HashTableChaining(int s) : size(s) {
-        keys = new Node*[size];
-        for (int i = 0; i < size; ++i) {
-            keys[i] = nullptr;
-        }
-    }
+    HashTableChaining(int s) : size(s), keys(s) {}
 
-    ~HashTableChaining() {
-        for (int i = 0; i < size; ++i) {
-            Node* entry = keys[i];
-            while (entry != nullptr) {
-                Node* prev = entry;
-                entry = entry->next;
-                delete prev;
-            }
-        }
-        delete[] keys;
-    }
-
-    void insert(int key) {
+    void insert(int key)
+    {
         int index = hashFunction(key);
-        Node* newNode = new Node(key);
-        if (keys[index] == nullptr) {
-            keys[index] = newNode;
-        } else {
-            Node* entry = keys[index];
-            while (entry->next != nullptr) {
-                if (entry->key == key) {
-                    delete newNode;
-                    return;
-                }
-                entry = entry->next;
-            }
-            if (entry->key == key) {
-                delete newNode;
-            } else {
-                entry->next = newNode;
+        for (int existingKey : keys[index])
+        {
+            if (existingKey == key)
+            {
+                return; // Key already exists
             }
         }
+        keys[index].push_back(key);
     }
 
-    bool search(int key) {
+    bool search(int key)
+    {
         int index = hashFunction(key);
-        Node* entry = keys[index];
-        while (entry != nullptr) {
-            if (entry->key == key) {
+        for (int existingKey : keys[index])
+        {
+            if (existingKey == key)
+            {
                 return true;
             }
-            entry = entry->next;
         }
         return false; // Key not found
     }
 
-    void deleteItem(int key) {
+    void deleteItem(int key)
+    {
         int index = hashFunction(key);
-        Node* entry = keys[index];
-        Node* prev = nullptr;
+        auto &chain = keys[index];
 
-        while (entry != nullptr && entry->key != key) {
-            prev = entry;
-            entry = entry->next;
+        for (auto it = chain.begin(); it != chain.end(); ++it)
+        {
+            if (*it == key)
+            {
+                chain.erase(it);
+                cout << "Key " << key << " deleted." << endl;
+                return;
+            }
         }
 
-        if (entry == nullptr) {
-            cout << "Key " << key << " not found." << endl;
-            return;
-        }
-
-        if (prev == nullptr) {
-            keys[index] = entry->next;
-        } else {
-            prev->next = entry->next;
-        }
-
-        delete entry;
-        cout << "Key " << key << " deleted." << endl;
+        cout << "Key " << key << " not found." << endl;
     }
-    void display() {
-        for (int i = 0; i < size; ++i) {
+
+    void display()
+    {
+        for (int i = 0; i < size; ++i)
+        {
             cout << i << ": ";
-            Node* entry = keys[i];
-            while (entry != nullptr) {
-                cout << "{" << entry->key << "} -> ";
-                entry = entry->next;
+            for (int key : keys[i])
+            {
+                cout << "{" << key << "} -> ";
             }
             cout << "NULL";
             cout << endl;
@@ -108,7 +82,8 @@ public:
     }
 };
 
-int main() {
+int main()
+{
     HashTableChaining ht(5);
     ht.insert(1);
     ht.insert(2);
